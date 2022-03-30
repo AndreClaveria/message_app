@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "916385131236",
+    "project_id": "messageapp-ef566",
+    "storage_bucket": "messageapp-ef566.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916385131236:android:b3af2eff8d6a1ab1ae5af1",
+        "android_client_info": {
+          "package_name": "com.company.messageappef566"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "916385131236-mcdqc7c4v3cgskcidnapaeotqo75bp8l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJbJpgjpIqhtuLnbOilUfzc_WQWN9Wl-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "916385131236-mcdqc7c4v3cgskcidnapaeotqo75bp8l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
