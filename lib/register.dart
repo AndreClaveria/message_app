@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
+import 'package:message_app/main.dart';
 
 class register extends StatefulWidget{
   @override
@@ -66,6 +67,7 @@ class registerState extends State<register>{
               filled: true,
               fillColor: Colors.white,
               border: OutlineInputBorder(
+
                 borderRadius: BorderRadius.circular(20),
               )
           ),
@@ -113,6 +115,7 @@ class registerState extends State<register>{
             onPressed: (){
 
               FirestoreHelper().inscription(mail: mail, password: password, prenom: prenom,nom: nom);
+
             },
             child: Text("Inscription")
         ),

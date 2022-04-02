@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
 
-          title: const Text("B2_C"),
+          title: const Text("Connexion"),
           backgroundColor: Colors.red,
         ),
         body: Container(
@@ -123,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
             shape: BoxShape.circle,
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: NetworkImage("https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg"),
+              image: NetworkImage("http://cdn.onlinewebfonts.com/svg/img_243887.png"),
             ),
 
           ),

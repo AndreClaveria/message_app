@@ -54,6 +54,13 @@ class FirestoreHelper{
 
   }
 
+  //getID
+  String getId() {
+    String id = auth.currentUser!.uid;
+    return id;
+  }
+
+
 //Stockage  d'une image
   Future <String> stockageImage(String name,Uint8List data) async {
     //Stocker mon image dans la base donnée

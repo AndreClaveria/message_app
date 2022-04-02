@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:message_app/model/Utilisateur.dart';
+
+import 'package:google_fonts/google_fonts.dart';
 
 class detail extends StatefulWidget{
   Utilisateur user;
@@ -18,31 +21,62 @@ class detailState extends State<detail>{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.user.prenom}  ${widget.user.nom!}"),
+        elevation: 0,
+        backgroundColor: Colors.black45,
+        toolbarHeight: 70,
+        title: Text("${widget.user.prenom}  ${widget.user.nom}"),
+
         centerTitle: true,
       ),
-      body: bodyPage(),
+      body: chatingSection(),
+
+
     );
   }
-  Widget bodyPage(){
-    return Column(
-      children: [
-        Container(
-          height: 150,
-          width: 150,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: (widget.user.avatar==null)
-                      ?const NetworkImage("https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg")
-                      :NetworkImage(widget.user.avatar!)
-              )
-          ),
-        ),
-        Text("${widget.user.prenom}  ${widget.user.nom}"),
-        (widget.user.birthday==null)?Container():Text(widget.user.birthday.toString())
-      ],
-    );
-  }
+
 }
+
+class chatingSection extends StatefulWidget{
+
+
+  @override
+  State<chatingSection> createState() => _chatingSectionState();
+}
+
+class _chatingSectionState extends State<chatingSection> {
+  String textInput = "";
+  @override
+  Widget build(BuildContext context) {
+
+      return const Align(
+          alignment: Alignment.bottomCenter,
+
+        child: TextField (
+          decoration: InputDecoration(
+            filled: true,
+
+            labelText: 'Enter your message',
+            hintText: 'Put a message',
+
+            fillColor: Colors.white30
+
+          ),
+        )
+
+       /* Container(
+          height: 100,
+          width: 1000,
+          color: Colors.green,
+
+
+          )*/
+
+      );
+
+
+
+
+
+    }
+}
+

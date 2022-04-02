@@ -8,6 +8,7 @@ class Utilisateur{
   String mail="";
   DateTime? birthday;
   String? avatar;
+  bool? friend;
 
 
 
@@ -22,6 +23,7 @@ class Utilisateur{
     mail = map ["MAIL"];
     //birthday = map["BIRTHDAY"];
     avatar = map["AVATAR"];
+    friend = map["FRIEND"];
   }
 
 
