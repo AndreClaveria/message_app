@@ -48,35 +48,31 @@ class _chatingSectionState extends State<chatingSection> {
   @override
   Widget build(BuildContext context) {
 
-      return const Align(
+      return Align(
           alignment: Alignment.bottomCenter,
 
         child: TextField (
+          onChanged: (value){
+            setState((){
+              textInput = value;
+            });
+          },
           decoration: InputDecoration(
-            filled: true,
 
+            filled: true,
             labelText: 'Enter your message',
             hintText: 'Put a message',
+            suffixIcon: IconButton(
+              iconSize: 35,
+              color: Colors.blue,
+              onPressed: (){
 
-            fillColor: Colors.white30
-
+              },
+              icon: Icon(Icons.send),
+            )
           ),
         )
-
-       /* Container(
-          height: 100,
-          width: 1000,
-          color: Colors.green,
-
-
-          )*/
-
       );
-
-
-
-
-
     }
 }
 

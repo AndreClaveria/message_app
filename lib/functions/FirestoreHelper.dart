@@ -26,6 +26,8 @@ class FirestoreHelper{
     addUser(uid, map);
 
   }
+  
+
 
   Future Connect({required String mail, required String password}) async {
     UserCredential result = await auth.signInWithEmailAndPassword(email: mail, password: password);
@@ -60,7 +62,6 @@ class FirestoreHelper{
     return id;
   }
 
-
 //Stockage  d'une image
   Future <String> stockageImage(String name,Uint8List data) async {
     //Stocker mon image dans la base donnée
@@ -69,8 +70,16 @@ class FirestoreHelper{
     //Récupérer le lien de mon image
     String urlChemin = await download.ref.getDownloadURL();
     return urlChemin;
+  }
 
+  Future signOut() async{
 
+    try{
+      return await auth.signOut();
+
+    }catch(e){
+      print(e.toString());
+    }
   }
 
 

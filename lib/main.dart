@@ -11,6 +11,8 @@ void main() async{
   runApp(const MyApp());
 }
 
+
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -74,8 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: AppBar(
 
+
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text("Connexion"),
           backgroundColor: Colors.red,
         ),

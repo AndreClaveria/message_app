@@ -4,8 +4,10 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
+import 'package:message_app/main.dart';
 import 'package:message_app/model/Utilisateur.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:message_app/register.dart';
 
 class myDrawer extends StatefulWidget{
   @override
@@ -167,6 +169,17 @@ class myDrawerState extends State<myDrawer>{
               Text("${myProfil.prenom} ${myProfil.nom}"),
               SizedBox(height: 20,),
               Text(myProfil.mail),
+              SizedBox(height: 20,),
+              ElevatedButton(
+                  onPressed: (){
+                    FirestoreHelper().signOut();
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context){
+                        return MyHomePage(title: "Connexion");
+                      }
+                    ));
+                    },
+                  child: Text("Sign Out"))
 
 
 
