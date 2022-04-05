@@ -211,24 +211,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-
-
-
-
-
-
-
-
-    //Image.network("https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg",);
-
-    /*const Text(
-        "Je suis un nouveau Widget",
-      style: TextStyle(
-          color: Colors.yellow,
-          fontSize: 35,
-      ),
-    )*/
-
   }
 
 }

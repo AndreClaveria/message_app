@@ -5,55 +5,61 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:message_app/model/Utilisateur.dart';
 
-class FirestoreHelper{
+class FirestoreHelper {
   //Attributs
   final auth = FirebaseAuth.instance;
-  final fire_user = FirebaseFirestore.instance.collection("Utilisateurs");
+  var fire_user = FirebaseFirestore.instance.collection("Utilisateurs");
+  var fire_message = FirebaseFirestore.instance.collection("Chatroom");
   final fireStorage = FirebaseStorage.instance;
 
   //Constructeur
 
   //Methode
-  Future inscription({required String mail, required String password,required String prenom,required String nom}) async{
-    UserCredential result = await auth.createUserWithEmailAndPassword(email: mail, password: password);
+  Future inscription(
+      {required String mail, required String password, required String prenom, required String nom}) async {
+    UserCredential result = await auth.createUserWithEmailAndPassword(
+        email: mail, password: password);
     User? user = result.user;
     String uid = user!.uid;
-    Map<String,dynamic> map ={
-      "NOM":nom,
-      "MAIL":mail,
-      "PRENOM":prenom
+    Map<String, dynamic> map = {
+      "NOM": nom,
+      "MAIL": mail,
+      "PRENOM": prenom
     };
     addUser(uid, map);
-
   }
-  
 
 
   Future Connect({required String mail, required String password}) async {
-    UserCredential result = await auth.signInWithEmailAndPassword(email: mail, password: password);
+    UserCredential result = await auth.signInWithEmailAndPassword(
+        email: mail, password: password);
   }
 
 
-  addUser(String uid,Map<String,dynamic> map){
+  addUser(String uid, Map<String, dynamic> map) {
     fire_user.doc(uid).set(map);
-
   }
 
-  updateUser(String uid,Map<String,dynamic> map){
+  updateUser(String uid, Map<String, dynamic> map) {
     fire_user.doc(uid).update(map);
   }
 
 //Récupérer l'uuid de la partie authentification
-  Future <String> getIdentifiant() async{
+  Future <String> getIdentifiant() async {
     String id = auth.currentUser!.uid;
     return id;
   }
 
+  Future <String> getMessages() async {
+    String id = fire_message.id;
+    return id;
+  }
+
+
 //Construire un utilisateur de type Utilisateur
-  Future <Utilisateur> getUtilisateur(String uid) async{
+  Future <Utilisateur> getUtilisateur(String uid) async {
     DocumentSnapshot snapshot = await fire_user.doc(uid).get();
     return Utilisateur(snapshot);
-
   }
 
   //getID
@@ -62,8 +68,15 @@ class FirestoreHelper{
     return id;
   }
 
+  String getChatroomId() {
+    String chatroomId = auth.currentUser!.uid;
+    return chatroomId;
+  }
+
+
+
 //Stockage  d'une image
-  Future <String> stockageImage(String name,Uint8List data) async {
+  Future <String> stockageImage(String name, Uint8List data) async {
     //Stocker mon image dans la base donnée
     TaskSnapshot download = await fireStorage.ref("image/$name").putData(data);
 
@@ -72,16 +85,29 @@ class FirestoreHelper{
     return urlChemin;
   }
 
-  Future signOut() async{
-
-    try{
+  Future signOut() async {
+    try {
       return await auth.signOut();
-
-    }catch(e){
+    } catch (e) {
       print(e.toString());
     }
   }
 
+  createChatRoom(String chatroomId, chatroomMap) {
+    FirebaseFirestore.instance.collection("Chatroom").doc(chatroomId).set(chatroomMap).catchError((e) {
+      print(e.toString());
+    });
+  }
 
+
+  sendMessage(String chatroomId, messageMap) {
+    print(chatroomId);
+    FirebaseFirestore.instance.collection("Chatroom").doc(chatroomId).collection("Messages").add(messageMap).catchError((e) {
+      print(e.toString());
+    });
+  }
 
 }
+
+
+
