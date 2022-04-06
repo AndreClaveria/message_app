@@ -9,7 +9,7 @@ class FirestoreHelper {
   //Attributs
   final auth = FirebaseAuth.instance;
   var fire_user = FirebaseFirestore.instance.collection("Utilisateurs");
-  var fire_message = FirebaseFirestore.instance.collection("Chatroom");
+
   final fireStorage = FirebaseStorage.instance;
 
   //Constructeur
@@ -50,10 +50,7 @@ class FirestoreHelper {
     return id;
   }
 
-  Future <String> getMessages() async {
-    String id = fire_message.id;
-    return id;
-  }
+
 
 
 //Construire un utilisateur de type Utilisateur
@@ -93,19 +90,8 @@ class FirestoreHelper {
     }
   }
 
-  createChatRoom(String chatroomId, chatroomMap) {
-    FirebaseFirestore.instance.collection("Chatroom").doc(chatroomId).set(chatroomMap).catchError((e) {
-      print(e.toString());
-    });
-  }
 
 
-  sendMessage(String chatroomId, messageMap) {
-    print(chatroomId);
-    FirebaseFirestore.instance.collection("Chatroom").doc(chatroomId).collection("Messages").add(messageMap).catchError((e) {
-      print(e.toString());
-    });
-  }
 
 }
 

@@ -1,19 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Message{
-  String id="";
-  String textInput="";
-  String author="";
-  DateTime? sendDay;
+  String idFrom="";
+  String idTo="";
+  String timestamp="";
+  String content = "";
 
 
   Message.vide();
 
   Message(DocumentSnapshot snapshot) {
-    id = snapshot.id;
+    idFrom = snapshot.id;
     Map<String, dynamic> map = snapshot.data() as Map<String, dynamic>;
-    textInput = map["TEXTINPUT"];
-    author = map["AUTHOR"];
-    sendDay = map["SENDDAY"];
+    idTo = map["IDTO"];
+    timestamp = map["TIMESTAMP"];
+    content = map["CONTENT"];
   }
+
+
 }

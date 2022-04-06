@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:message_app/dashboard.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
 import 'package:message_app/register.dart';
+import 'package:message_app/variables/constant.dart';
 
 
 void main() async{
@@ -178,15 +179,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     borderRadius: BorderRadius.circular(15)
                 )
             ),
-            onPressed: (){
+            onPressed: () {
 
               print("Je  suis connecté");
               FirestoreHelper().Connect(mail: mail, password: password).then((value){
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (context){
-                      return dashBoard();
-                    }
-                ));
+                setState(() {
+                  monProfil = value;
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context){
+                        return dashBoard();
+                      }
+                  ));
+                });
+
               }).catchError((error){
                 popUp();
               });

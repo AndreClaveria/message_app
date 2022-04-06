@@ -110,8 +110,8 @@ class myDrawerState extends State<myDrawer>{
     );
     if(result !=null){
       setState(() {
-        byteData = result!.files.first.bytes;
-        fileName = result!.files.first.name;
+        byteData = result.files.first.bytes;
+        fileName = result.files.first.name;
       });
       PopImage();
     }

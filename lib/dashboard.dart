@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:message_app/MyWidgets/menuDrawer.dart';
-import 'package:message_app/detail.dart';
+import 'package:message_app/discussion.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
+import 'package:message_app/model/Message.dart';
 import 'package:message_app/model/Utilisateur.dart';
+import 'package:message_app/variables/constant.dart';
+
 import 'dart:math';
 
 class dashBoard extends StatefulWidget{
@@ -25,15 +28,7 @@ class dashBoardState extends State<dashBoard>{
      return "$a\_$b";
    }
  }
-  createChatWithUser(String user){
-   String chatroomId = getChatRoomId(FirestoreHelper().getId(), user);
-    List<String> users = [user,FirestoreHelper().getId()];
-    Map<String, dynamic> chatroomMap ={
-      "users" : users,
-      "chatroomId" : chatroomId,
-    };
-    FirestoreHelper().createChatRoom(chatroomId, chatroomMap);
-  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -79,9 +74,9 @@ class dashBoardState extends State<dashBoard>{
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (context){
-                                  createChatWithUser(user.id);
-                                  
-                                  return detail(user: user);
+
+
+                                  return discussion(user: monProfil, monpartenaire: user);
                                 }
                             ));
                           },
