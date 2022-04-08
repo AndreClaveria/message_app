@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:message_app/dashboard.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
 import 'package:message_app/main.dart';
+import 'package:message_app/variable/constant.dart';
 
 class register extends StatefulWidget{
   @override
@@ -114,7 +116,17 @@ class registerState extends State<register>{
             ),
             onPressed: (){
 
-              FirestoreHelper().inscription(mail: mail, password: password, prenom: prenom,nom: nom);
+              FirestoreHelper().inscription(mail: mail, password: password, prenom: prenom,nom: nom).then((value){
+
+                  Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return dashBoard();
+                  }
+                  ));
+
+              }).catchError((onError){
+
+              });
 
             },
             child: Text("Inscription")

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
 import 'package:message_app/functions/MessageStoreHelper.dart';
 import 'package:message_app/model/Utilisateur.dart';
+import 'package:message_app/messageController.dart';
+import 'package:message_app/variable/lib.dart';
 
 import 'detail.dart';
 import 'model/Message.dart';
@@ -22,13 +24,8 @@ class discussion extends StatefulWidget{
 
 class discussionState extends State<discussion>{
 
-
-
   String message = "";
   String messagees = "";
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,37 +60,20 @@ class discussionState extends State<discussion>{
 
   Widget showMessage(){
     return Container(
-        height: 15000,
-        width: 1000,
-
- /*     children: [
-        StreamBuilder<QuerySnapshot>(
-          stream: MessageStoreHelper().fire_message.snapshots(),
-            builder: (context, snapshot){
-            if(!snapshot.hasData){
-              return CircularProgressIndicator();
-            }
-            else {
-              List documents = snapshot.data!.docs;
-
-              return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: documents.length,
-                  itemBuilder: (context, index) {
-                    Message message = Message(documents[index]);
-                    return ListTile(
-
-                      title: Text("${message.content}"),
-                    );
-                  }
-              );
-            }
-            })
-
-        ],*/
+        child: Column(
+          children: [
+            new Flexible(child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: MessageController(monProfil, widget.user),
+            )),
+            new Divider(height: 1.5,),
+            writeBar()
+          ],
+        ),
     );
   }
   Widget writeBar() {
+
     return Container(
         alignment: Alignment.bottomCenter,
           
@@ -107,13 +87,13 @@ class discussionState extends State<discussion>{
           decoration: InputDecoration(
 
               filled: true,
-              labelText: 'Enter your message',
-              hintText: 'Put a message',
+
+
               suffixIcon: IconButton(
                 iconSize: 35,
                 color: Colors.blue,
                 onPressed: (){
-                  MessageStoreHelper().createChatRoom(FirestoreHelper().getId(), widget.user.id, message);
+                  MessageStoreHelper().sendMessage(message, widget.user, monProfil);
                 },
                 icon: Icon(Icons.send),
               )
@@ -121,6 +101,8 @@ class discussionState extends State<discussion>{
         )
     );
   }
+
+
 }
 
 

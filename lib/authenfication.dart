@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:message_app/dashboard.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
 import 'package:message_app/register.dart';
+import 'package:message_app/variable/lib.dart';
 
 
 class authentification extends StatefulWidget {
@@ -138,11 +139,14 @@ class authentificationState extends State<authentification> {
             onPressed: () {
               print("Je  suis connecté");
               FirestoreHelper().Connect(mail: mail, password: password).then((value) {
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return dashBoard();
-                    }
-                ));
+
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return dashBoard();
+                      }
+                  ));
+
+
               }).catchError((error) {
                 popUp();
               });

@@ -26,6 +26,15 @@ class Utilisateur{
     friend = map["FRIEND"];
   }
 
+  Map<String,dynamic> toMap() {
+    Map <String, dynamic> map;
+    return map = {
+      'NOM': nom,
+      'PRENOM': prenom,
+      'AVATAR': avatar,
+      'MAIL': mail,
+    };
+  }
 
 //Methode
 }

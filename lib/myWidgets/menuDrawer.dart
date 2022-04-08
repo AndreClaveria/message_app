@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:message_app/authenfication.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
-import 'package:message_app/main.dart';
+import 'package:message_app/variable/lib.dart';
 import 'package:message_app/model/Utilisateur.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -20,7 +20,7 @@ class myDrawer extends StatefulWidget{
 }
 
 class myDrawerState extends State<myDrawer>{
-  late Utilisateur myProfil;
+
   late String uid;
   late Uint8List? byteData;
   late String fileName;
@@ -63,7 +63,7 @@ class myDrawerState extends State<myDrawer>{
                     Map<String,dynamic> map ={
                       "NOM": newnom,
                     };
-                    FirestoreHelper().updateUser(myProfil.id, map);
+                    FirestoreHelper().updateUser(monProfil.id, map);
                     Navigator.pop(context);
                   },
                   child: Text("Sauvegarder"
@@ -105,7 +105,7 @@ class myDrawerState extends State<myDrawer>{
                     Map<String,dynamic> map ={
                       "NOM": newnom,
                     };
-                    FirestoreHelper().updateUser(myProfil.id, map);
+                    FirestoreHelper().updateUser(monProfil.id, map);
                     Navigator.pop(context);
                   },
                   child: Text("Sauvegarder"),
@@ -156,7 +156,7 @@ class myDrawerState extends State<myDrawer>{
                     Map<String,dynamic> map ={
                       "PRENOM": newprenom,
                     };
-                    FirestoreHelper().updateUser(myProfil.id, map);
+                    FirestoreHelper().updateUser(monProfil.id, map);
                     Navigator.pop(context);
                   },
                   child: Text("Sauvegarder"),
@@ -197,7 +197,7 @@ class myDrawerState extends State<myDrawer>{
                     Map<String,dynamic> map ={
                       "PRENOM": newprenom,
                     };
-                    FirestoreHelper().updateUser(myProfil.id, map);
+                    FirestoreHelper().updateUser(monProfil.id, map);
                     Navigator.pop(context);
                   },
                   child: Text("Sauvegarder"),
@@ -240,7 +240,7 @@ class myDrawerState extends State<myDrawer>{
                     Map<String,dynamic> map ={
                       "AVATAR": urlImage,
                     };
-                    FirestoreHelper().updateUser(myProfil.id, map);
+                    FirestoreHelper().updateUser(monProfil.id, map);
                     Navigator.pop(context);
                     //enregitrer notre image dans la base de donnée
                   },
@@ -273,7 +273,7 @@ class myDrawerState extends State<myDrawer>{
                     Map<String,dynamic> map ={
                       "AVATAR": urlImage,
                     };
-                    FirestoreHelper().updateUser(myProfil.id, map);
+                    FirestoreHelper().updateUser(monProfil.id, map);
                     Navigator.pop(context);
                     //enregitrer notre image dans la base de donnée
                   },
@@ -314,7 +314,7 @@ class myDrawerState extends State<myDrawer>{
         uid = identifiant;
         FirestoreHelper().getUtilisateur(uid).then((Utilisateur user){
           setState(() {
-            myProfil = user;
+            monProfil = user;
           });
         });
       });
@@ -340,9 +340,9 @@ class myDrawerState extends State<myDrawer>{
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: (myProfil.avatar == null)?
+                          image: (monProfil.avatar == null)?
                           NetworkImage("https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg"):
-                          NetworkImage(myProfil.avatar!)
+                          NetworkImage(monProfil.avatar!)
                       )
                   ),
                 ),
@@ -354,16 +354,16 @@ class myDrawerState extends State<myDrawer>{
               ),
               SizedBox(height: 20,),
               InkWell(
-                child: Text("${myProfil.prenom}"),
+                child: Text("${monProfil.prenom}"),
                 onTap: () {PopPrenom();},
               ),
               SizedBox(height: 20,),
               InkWell(
-                child: Text("${myProfil.nom}"),
+                child: Text("${monProfil.nom}"),
                 onTap: () {PopNom();},
               ),
               SizedBox(height: 20,),
-              Text(myProfil.mail),
+              Text(monProfil.mail),
               SizedBox(height: 20,),
               ElevatedButton(
                   onPressed: (){

@@ -33,8 +33,6 @@ class DetailState extends State<Detail>{
               padding: const EdgeInsets.all(20),
               child: bodyPage(),
             )
-
-
           ],
         )
 
@@ -66,7 +64,6 @@ class DetailState extends State<Detail>{
             Card(
               elevation: 5.0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-
               child: Container(
                 padding: const EdgeInsets.all(20),
                 height: MediaQuery.of(context).size.height/2,
@@ -76,7 +73,6 @@ class DetailState extends State<Detail>{
                     Text("${widget.user.prenom} ${widget.user.nom}"),
                     const SizedBox(height: 20,),
                     Text(widget.user.mail),
-
                   ],
                 ),
               ),
