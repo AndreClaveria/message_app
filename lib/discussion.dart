@@ -3,17 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
 import 'package:message_app/functions/MessageStoreHelper.dart';
-import 'package:message_app/model/Message.dart';
 import 'package:message_app/model/Utilisateur.dart';
-import 'package:message_app/variables/constant.dart';
-import 'package:intl/intl.dart';
 
-import 'package:google_fonts/google_fonts.dart';
+import 'detail.dart';
+import 'model/Message.dart';
 
 class discussion extends StatefulWidget{
   Utilisateur user;
-  Utilisateur monpartenaire;
-  discussion({required this.user, required this.monpartenaire});
+
+  discussion({required this.user});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -30,37 +28,45 @@ class discussionState extends State<discussion>{
   String messagees = "";
 
 
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
 
     return Scaffold(
+        appBar: AppBar(
+        flexibleSpace: GestureDetector(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context){
+              return Detail(user: widget.user,);
+            }
+          ));
 
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.black45,
-        toolbarHeight: 70,
+        }
+        ),
+          title: Text("${widget.user.prenom}  ${widget.user.nom}"),
+          centerTitle: true,
 
-        title: Text("${widget.monpartenaire.prenom}  ${widget.monpartenaire.nom}"),
-
-
-        centerTitle: true,
-      ),
-      body: Column(
+        ),
+      // ),
+      body: Stack(
         children: <Widget>[
           showMessage(),
-          Expanded(child: writeBar()),
+
+          writeBar(),
         ],
       ),
-
-
     );
   }
 
   Widget showMessage(){
-    return Column(
+    return Container(
+        height: 15000,
+        width: 1000,
 
-      /*children: [
+ /*     children: [
         StreamBuilder<QuerySnapshot>(
           stream: MessageStoreHelper().fire_message.snapshots(),
             builder: (context, snapshot){
@@ -88,10 +94,7 @@ class discussionState extends State<discussion>{
     );
   }
   Widget writeBar() {
-
     return Container(
-
-
         alignment: Alignment.bottomCenter,
           
         child: TextField (
@@ -110,7 +113,7 @@ class discussionState extends State<discussion>{
                 iconSize: 35,
                 color: Colors.blue,
                 onPressed: (){
-                  MessageStoreHelper().createChatRoom(widget.user.id, widget.monpartenaire.id, message);
+                  MessageStoreHelper().createChatRoom(FirestoreHelper().getId(), widget.user.id, message);
                 },
                 icon: Icon(Icons.send),
               )
@@ -118,7 +121,6 @@ class discussionState extends State<discussion>{
         )
     );
   }
-
 }
 
 

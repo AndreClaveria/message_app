@@ -26,7 +26,7 @@ class MessageStoreHelper{
       "context": context,
     };
     FirebaseFirestore.instance.collection("Chatroom")
-        .doc(a)
+        .doc(chatroomId)
         .set(chatroomMap);
    
   }

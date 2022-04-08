@@ -3,11 +3,12 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:message_app/authenfication.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
 import 'package:message_app/main.dart';
 import 'package:message_app/model/Utilisateur.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:message_app/register.dart';
+
 
 class myDrawer extends StatefulWidget{
   @override
@@ -24,16 +25,31 @@ class myDrawerState extends State<myDrawer>{
   late Uint8List? byteData;
   late String fileName;
   late String urlImage;
-
-  PopImage(){
+  String newprenom="";
+  String newnom ="";
+  PopNom(){
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context){
           if(Platform.isIOS){
             return CupertinoAlertDialog(
-              title: Text("Souhaitez utilser cette photo comme profil ?"),
-              content: Image.memory(byteData!),
+              title: Text("Quel nouveau Nom voulez-vous ?"),
+              content : TextField(
+                onChanged: (value){
+                  setState(() {
+                    newnom = value;
+                  });
+                },
+                decoration: InputDecoration(
+                    hintText: "Entrez le nouveau nom",
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )
+                ),
+              ),
               actions: [
                 ElevatedButton(
                     onPressed: (){
@@ -44,19 +60,13 @@ class myDrawerState extends State<myDrawer>{
 
                 ElevatedButton(
                   onPressed: (){
-                    FirestoreHelper().stockageImage(fileName, byteData!).then((String lienImage){
-                      setState(() {
-                        urlImage = lienImage;
-                      });
-                    });
                     Map<String,dynamic> map ={
-                      "AVATAR": urlImage,
+                      "NOM": newnom,
                     };
                     FirestoreHelper().updateUser(myProfil.id, map);
                     Navigator.pop(context);
-                    //enregitrer notre image dans la base de donnée
                   },
-                  child: Text("Enregitrement)"
+                  child: Text("Sauvegarder"
                   ),
                 )
 
@@ -66,7 +76,151 @@ class myDrawerState extends State<myDrawer>{
           else
           {
             return AlertDialog(
-              title: Text("Souhaitez utilser cette photo comme profil ?"),
+              title: Text("Quel nouveau Nom voulez-vous ?"),
+              content : TextField(
+                onChanged: (value){
+                  setState(() {
+                    newnom = value;
+                  });
+                },
+                decoration: InputDecoration(
+                    hintText: "Entrez le nouveau nom",
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )
+                ),
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: Text("Annuler")
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Map<String,dynamic> map ={
+                      "NOM": newnom,
+                    };
+                    FirestoreHelper().updateUser(myProfil.id, map);
+                    Navigator.pop(context);
+                  },
+                  child: Text("Sauvegarder"),
+                )
+
+              ],
+
+            );
+          }
+
+        }
+    );
+
+  }
+  PopPrenom(){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context){
+          if(Platform.isIOS){
+            return CupertinoAlertDialog(
+              title: Text("Quel nouveau Prenom voulez-vous ?"),
+              content : TextField(
+                onChanged: (value){
+                  setState(() {
+                    newprenom = value;
+                  });
+                },
+                decoration: InputDecoration(
+                    hintText: "Entrez le nouveau prenom",
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )
+                ),
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: Text("Annuler")
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Map<String,dynamic> map ={
+                      "PRENOM": newprenom,
+                    };
+                    FirestoreHelper().updateUser(myProfil.id, map);
+                    Navigator.pop(context);
+                  },
+                  child: Text("Sauvegarder"),
+                )
+
+              ],
+            );
+          }
+          else
+          {
+            return AlertDialog(
+              title: Text("Quel nouveau Prenom voulez-vous ?"),
+              content : TextField(
+                onChanged: (value){
+                  setState(() {
+                    newprenom = value;
+                  });
+                },
+                decoration: InputDecoration(
+                    hintText: "Entrez le nouveau prenom",
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )
+                ),
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: Text("Annuler")
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    Map<String,dynamic> map ={
+                      "PRENOM": newprenom,
+                    };
+                    FirestoreHelper().updateUser(myProfil.id, map);
+                    Navigator.pop(context);
+                  },
+                  child: Text("Sauvegarder"),
+                )
+
+              ],
+
+            );
+          }
+
+        }
+    );
+
+  }
+
+  PopImage(){
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context){
+          if(Platform.isIOS){
+            return CupertinoAlertDialog(
+              title: Text("Souhaitez-vous utiliser cette photo comme profil ?"),
               content: Image.memory(byteData!),
               actions: [
                 ElevatedButton(
@@ -90,8 +244,40 @@ class myDrawerState extends State<myDrawer>{
                     Navigator.pop(context);
                     //enregitrer notre image dans la base de donnée
                   },
-                  child: Text("Enregitrement)"
-                  ),
+                  child: Text("Enregitrement"),
+                )
+
+              ],
+            );
+          }
+          else
+          {
+            return AlertDialog(
+              title: Text("Souhaitez-vous utiliser cette photo comme profil ?"),
+              content: Image.memory(byteData!),
+              actions: [
+                ElevatedButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: Text("Annuler")
+                ),
+
+                ElevatedButton(
+                  onPressed: (){
+                    FirestoreHelper().stockageImage(fileName, byteData!).then((String lienImage){
+                      setState(() {
+                        urlImage = lienImage;
+                      });
+                    });
+                    Map<String,dynamic> map ={
+                      "AVATAR": urlImage,
+                    };
+                    FirestoreHelper().updateUser(myProfil.id, map);
+                    Navigator.pop(context);
+                    //enregitrer notre image dans la base de donnée
+                  },
+                  child: Text("Enregitrement"),
                 )
 
               ],
@@ -154,7 +340,9 @@ class myDrawerState extends State<myDrawer>{
                       shape: BoxShape.circle,
                       image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: (myProfil.avatar == null)?NetworkImage("https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg"):NetworkImage(myProfil.avatar!)
+                          image: (myProfil.avatar == null)?
+                          NetworkImage("https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg"):
+                          NetworkImage(myProfil.avatar!)
                       )
                   ),
                 ),
@@ -164,9 +352,16 @@ class myDrawerState extends State<myDrawer>{
 
                 },
               ),
-
               SizedBox(height: 20,),
-              Text("${myProfil.prenom} ${myProfil.nom}"),
+              InkWell(
+                child: Text("${myProfil.prenom}"),
+                onTap: () {PopPrenom();},
+              ),
+              SizedBox(height: 20,),
+              InkWell(
+                child: Text("${myProfil.nom}"),
+                onTap: () {PopNom();},
+              ),
               SizedBox(height: 20,),
               Text(myProfil.mail),
               SizedBox(height: 20,),
@@ -174,11 +369,11 @@ class myDrawerState extends State<myDrawer>{
                   onPressed: (){
                     FirestoreHelper().signOut();
                     Navigator.push(context, MaterialPageRoute(
-                      builder: (context){
-                        return MyHomePage(title: "Connexion");
-                      }
+                        builder: (context){
+                          return authentification();
+                        }
                     ));
-                    },
+                  },
                   child: Text("Sign Out"))
 
 
@@ -189,13 +384,5 @@ class myDrawerState extends State<myDrawer>{
     );
 
   }
-
-
-
-
-
-
-
-
 
 }

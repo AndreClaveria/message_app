@@ -1,12 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:message_app/MyWidgets/menuDrawer.dart';
 import 'package:message_app/discussion.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
-import 'package:message_app/model/Message.dart';
 import 'package:message_app/model/Utilisateur.dart';
-import 'package:message_app/variables/constant.dart';
+import 'dart:math';
 
 import 'dart:math';
 
@@ -20,6 +22,7 @@ class dashBoard extends StatefulWidget{
 }
 
 class dashBoardState extends State<dashBoard>{
+
  getChatRoomId(String a, String b) {
    if(a.substring(0,1).codeUnitAt(0) > b.substring(0,1).codeUnitAt(0)) {
      return "$b\_$a";
@@ -28,6 +31,55 @@ class dashBoardState extends State<dashBoard>{
      return "$a\_$b";
    }
  }
+
+ PopAmis(){
+   showDialog(
+       context: context,
+       barrierDismissible: false,
+       builder: (context){
+
+         if(Platform.isIOS){
+           return CupertinoAlertDialog(
+             title: Text("Voulez-vous l'ajouté a vos amis ?"),
+             actions: [
+               ElevatedButton(
+                   onPressed: (){
+                     Navigator.pop(context);
+                   },
+                   child: Text("Annuler")
+               ),
+               ElevatedButton(
+                 onPressed: (){
+                 },
+                 child: Text("Oui"),
+               )
+
+             ],
+           );
+         }
+         else
+         {
+           return AlertDialog(
+             title: Text("Voulez-vous l'ajouté a vos amis ?"),
+             actions: [
+               ElevatedButton(
+                   onPressed: (){
+                     Navigator.pop(context);
+                   },
+                   child: Text("Annuler")
+               ),
+               ElevatedButton(
+                 onPressed: (){
+                 },
+                 child: Text("Oui"),
+               )
+             ],
+           );
+         }
+       }
+   );
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +100,11 @@ class dashBoardState extends State<dashBoard>{
     return Column (
       children : [
 
-
+        SizedBox(height: 20,),
         Text("Bonjours voici vos contact choississez vos favoris !"),
+        SizedBox(height: 20,),
         Text ("Cliquez sur le bouton pour voir vos Amis !"),
+        SizedBox(height: 40,),
         StreamBuilder<QuerySnapshot>(
             stream: FirestoreHelper().fire_user.snapshots(),
             builder: (context, snapshot){
@@ -63,6 +117,7 @@ class dashBoardState extends State<dashBoard>{
 
                 return ListView.builder(
                     shrinkWrap: true,
+
                     itemCount: documents.length,
                     itemBuilder: (context,index){
                       Utilisateur user = Utilisateur(documents[index]);
@@ -76,12 +131,23 @@ class dashBoardState extends State<dashBoard>{
                                 builder: (context){
 
 
-                                  return discussion(user: monProfil, monpartenaire: user);
+                                  return discussion(user: user);
                                 }
                             ));
                           },
                           title:Text("${user.prenom}"),
-                          trailing: IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
+                          trailing: IconButton(onPressed: (){PopAmis();}, icon: Icon(Icons.favorite, color : Colors.blue)),
+                          leading: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image:(user.avatar!=null)?NetworkImage(user.avatar!):const NetworkImage("https://firebasestorage.googleapis.com/v0/b/projetfinalb2.appspot.com/o/inconnu.jpeg?alt=media&token=fe5ffbb2-f9fa-4a7a-bdc1-6a482817c9d4")
+                             )
+                          ),
+                          )
                         );
 
                       }else{
@@ -91,10 +157,16 @@ class dashBoardState extends State<dashBoard>{
                       }
 
                     }
+
                 );
+
               }
+
+
+
             }
         ),
+
         ElevatedButton(
             style: ElevatedButton.styleFrom(
                 primary: Colors.lightBlue,
@@ -103,7 +175,7 @@ class dashBoardState extends State<dashBoard>{
                 )
             ),
             onPressed: (){
-              print("Je  suis connectÃ©");
+              print("Page favoris");
 
             },
             child: Text("Amis")
