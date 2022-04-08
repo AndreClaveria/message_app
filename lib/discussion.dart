@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:message_app/functions/FirestoreHelper.dart';
 import 'package:message_app/functions/MessageStoreHelper.dart';
 import 'package:message_app/model/Utilisateur.dart';
 import 'package:message_app/messageController.dart';
 import 'package:message_app/variable/lib.dart';
 
 import 'detail.dart';
-import 'model/Message.dart';
+
 
 class discussion extends StatefulWidget{
   Utilisateur user;

@@ -144,11 +144,11 @@ class dashBoardState extends State<dashBoard>{
     return Column (
       children : [
         SizedBox(height: 20,),
-        Text("Bonjours voici vos contact choississez vos favoris !"),
+        Text("Bonjour voici vos contact choississez vos favoris !"),
         SizedBox(height: 20,),
-        Text ("Cliquez sur le bouton pour voir vos Amis !"),
+        Text ("Cliquer sur l'icone du drawer pour activer la variable monProfil!"),
         SizedBox(height: 20,),
-        Text ("Cliquez sur un  Amis pour converser avec lui !"),
+        Text ("Cliquer sur un  Amis pour converser avec lui !"),
         SizedBox(height: 40,),
         StreamBuilder<QuerySnapshot>(
             stream: FirestoreHelper().fire_user.snapshots(),
