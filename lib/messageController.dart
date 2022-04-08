@@ -9,7 +9,7 @@ import 'package:message_app/showMessage.dart';
 class MessageController extends StatefulWidget{
   Utilisateur id;
   Utilisateur idPartner;
-  MessageController(@required Utilisateur this.id,@required Utilisateur this.idPartner);
+  MessageController(this.id,this.idPartner);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState

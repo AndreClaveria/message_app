@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +6,6 @@ import 'package:message_app/MyWidgets/menuDrawer.dart';
 import 'package:message_app/discussion.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
 import 'package:message_app/model/Utilisateur.dart';
-import 'dart:math';
-
-import 'dart:math';
 
 class dashBoard extends StatefulWidget{
   @override
