@@ -32,6 +32,7 @@ class discussionState extends State<discussion>{
     // TODO: implement build
 
     return Scaffold(
+      backgroundColor: Colors.white12,
         appBar: AppBar(
         flexibleSpace: GestureDetector(
         onTap: (){
@@ -78,7 +79,7 @@ class discussionState extends State<discussion>{
         alignment: Alignment.bottomCenter,
           
         child: TextField (
-
+          style: TextStyle(color: Colors. white),
           onChanged: (value){
             setState((){
               message = value;
@@ -91,7 +92,7 @@ class discussionState extends State<discussion>{
 
               suffixIcon: IconButton(
                 iconSize: 35,
-                color: Colors.blue,
+                color: Colors.lightBlue,
                 onPressed: (){
                   MessageStoreHelper().sendMessage(message, widget.user, monProfil);
                 },

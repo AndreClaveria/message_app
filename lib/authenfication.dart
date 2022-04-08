@@ -39,6 +39,7 @@ class authentificationState extends State<authentification> {
 
         ),
         body: Container(
+          color: Colors.black,
 
           padding: EdgeInsets.all(20),
           child: Center(
@@ -82,15 +83,14 @@ class authentificationState extends State<authentification> {
             shape: BoxShape.circle,
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: NetworkImage("https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"),
+              image: NetworkImage("https://cdn-icons-png.flaticon.com/512/5158/5158652.png"),
             ),
 
           ),
         ),
         SizedBox(height: 20,),
         SizedBox(height: 20,),
-        SizedBox(height: 20,),
-        SizedBox(height: 20,),
+
 
         //Utilisateur tape son adresse mail
         TextField(
@@ -131,13 +131,13 @@ class authentificationState extends State<authentification> {
         //Bouton de connexion
         ElevatedButton(
             style: ElevatedButton.styleFrom(
-                primary: Colors.amber,
+                primary: Colors.lightBlue,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)
                 )
             ),
             onPressed: () {
-              print("Je  suis connecté");
+              print("Je suis connecté");
               FirestoreHelper().Connect(mail: mail, password: password).then((value) {
 
                   Navigator.push(context, MaterialPageRoute(
@@ -164,7 +164,7 @@ class authentificationState extends State<authentification> {
                 }
             ));
           },
-          child: Text("Inscription", style: TextStyle(color: Colors.blue),),
+          child: Text("Inscription", style: TextStyle(color: Colors.lightBlue),),
         )
 
 

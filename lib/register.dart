@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:message_app/dashboard.dart';
 import 'package:message_app/functions/FirestoreHelper.dart';
 import 'package:message_app/main.dart';
@@ -30,6 +31,8 @@ class registerState extends State<register>{
         body:Container(
           padding: EdgeInsets.all(20),
           child:  bodyPage(),
+          color: Colors.black,
+
         )
 
     );
@@ -37,7 +40,9 @@ class registerState extends State<register>{
 
 
   Widget bodyPage(){
+
     return Column(
+
       children: [
         SizedBox(height: 20,),
         TextField(
@@ -109,7 +114,7 @@ class registerState extends State<register>{
         SizedBox(height: 20,),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
-                primary: Colors.amber,
+                primary: Colors.lightBlue,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)
                 )

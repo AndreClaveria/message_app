@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:message_app/authenfication.dart';
+import 'package:flutter/src/material/colors.dart';
+import 'dart:ui';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.lightBlue,
       ),
       home: const authentification(),
       debugShowCheckedModeBanner: false,

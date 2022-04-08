@@ -26,6 +26,55 @@ class dashBoardState extends State<dashBoard>{
      return "$a\_$b";
    }
  }
+ PopAmisAmis(){
+   showDialog(
+       context: context,
+       barrierDismissible: false,
+       builder: (context){
+
+         if(Platform.isIOS){
+           return CupertinoAlertDialog(
+             title: Text("Voulez-vous passez un bon moment ?"),
+             actions: [
+               ElevatedButton(
+                   onPressed: (){
+                     Navigator.pop(context);
+                   },
+                   child: Text("Non")
+               ),
+               ElevatedButton(
+                 onPressed: (){
+                 },
+                 child: Text("Non"),
+               )
+
+             ],
+           );
+         }
+         else
+         {
+           return AlertDialog(
+             title: Text("Vous voulez passez un bon moment ?"),
+             actions: [
+               ElevatedButton(
+                   onPressed: (){
+                     Navigator.pop(context);
+                   },
+                   child: Text("Non")
+               ),
+               ElevatedButton(
+                 onPressed: (){
+                 },
+                 child: Text("Non"),
+               )
+             ],
+
+           );
+         }
+       }
+   );
+
+ }
 
  PopAmis(){
    showDialog(
@@ -94,11 +143,12 @@ class dashBoardState extends State<dashBoard>{
 
     return Column (
       children : [
-
         SizedBox(height: 20,),
         Text("Bonjours voici vos contact choississez vos favoris !"),
         SizedBox(height: 20,),
         Text ("Cliquez sur le bouton pour voir vos Amis !"),
+        SizedBox(height: 20,),
+        Text ("Cliquez sur un  Amis pour converser avec lui !"),
         SizedBox(height: 40,),
         StreamBuilder<QuerySnapshot>(
             stream: FirestoreHelper().fire_user.snapshots(),
@@ -131,7 +181,7 @@ class dashBoardState extends State<dashBoard>{
                             ));
                           },
                           title:Text("${user.prenom}"),
-                          trailing: IconButton(onPressed: (){PopAmis();}, icon: Icon(Icons.favorite, color : Colors.blue)),
+                          trailing: IconButton(onPressed: (){PopAmis();}, icon: Icon(Icons.favorite, color : Colors.lightBlue)),
                           leading: Container(
                           height: 50,
                           width: 50,
@@ -170,8 +220,7 @@ class dashBoardState extends State<dashBoard>{
                 )
             ),
             onPressed: (){
-              print("Page favoris");
-
+              PopAmisAmis();
             },
             child: Text("Amis")
         ),

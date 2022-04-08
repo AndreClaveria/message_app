@@ -325,7 +325,7 @@ class myDrawerState extends State<myDrawer>{
 
     return Container(
         padding: EdgeInsets.all(20),
-        color: Colors.white,
+        color: Colors.black,
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width/2,
         child: Center(
@@ -353,17 +353,38 @@ class myDrawerState extends State<myDrawer>{
                 },
               ),
               SizedBox(height: 20,),
+              Text("Cliquez sur le prenom ou nom pour le modifier !",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12.0,
+
+                ),
+              ),
+              SizedBox(height: 20,),
               InkWell(
-                child: Text("${monProfil.prenom}"),
+                child: Text("Prenom : ${monProfil.prenom}",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
                 onTap: () {PopPrenom();},
               ),
               SizedBox(height: 20,),
               InkWell(
-                child: Text("${monProfil.nom}"),
+                child: Text("Nom : ${monProfil.nom}",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
                 onTap: () {PopNom();},
               ),
               SizedBox(height: 20,),
-              Text(monProfil.mail),
+              Text(monProfil.mail,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
               SizedBox(height: 20,),
               ElevatedButton(
                   onPressed: (){
